@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.marvel.marvel.Comics.Comic;
-import com.example.marvel.marvel.Interfaces.IListComicsView;
 import com.example.marvel.marvel.Presenter.ListComicsPresenter;
 import com.example.marvel.marvel.R;
 
@@ -29,27 +28,25 @@ import butterknife.OnClick;
 
 public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder> {
 
-    @Bind(R.id.imgComicList)
 
-    ImageView imgComicList;
-    @Bind(R.id.tvNamelist)
-
-    TextView tvNamelIST;
-    @Bind(R.id.card)
-    CardView card2;
-    @Bind(R.id.rlCard)
     RelativeLayout activityMain;
     public ListComicsPresenter listener;
     private ArrayList<Comic> datos;
     private static Context ctx;
 
-
-
     @OnClick(R.id.card)
     public void onClick() {
+        
     }
 
-    public  class ComicsViewHolder extends RecyclerView.ViewHolder {
+
+    public class ComicsViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.imgComicList)
+        ImageView imgComicList;
+        @Bind(R.id.tvNamelist)
+        TextView tvNamelist;
+        @Bind(R.id.card)
+        CardView card;
 
         public ComicsViewHolder(View itemView) {
             super(itemView);
@@ -57,11 +54,14 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsView
         }
 
         public void bindComic(Comic comic) {
-            tvNamelIST.setText(comic.getTitulo());
-            Glide.with(ctx).load(comic.getImageUrl())
+            tvNamelist.setText(comic.getTitulo());
+            Glide.with(ctx).load(comic.getImageUrl() + "." + comic.getExtensionImage())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
 //                    .placeholder(R.drawable)
 //                    .error(R.drawable.loaderror)
+//                    .centerCrop()
+                    .centerCrop()
+                    .animate(android.R.anim.fade_in)
                     .into(imgComicList);
 //            listener.goToDetailContact(comic);
             listener.onItemClick(comic);
