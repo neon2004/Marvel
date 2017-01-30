@@ -60,6 +60,7 @@ public class ListComicsFragments extends Fragment implements IListComicsView {
         super.onViewCreated(view, savedInstanceState);
 
         this.comicsListPresenter = new ListComicsPresenter(this,getActivity());
+        this.comicsListPresenter.start();
     }
 
 

@@ -1,27 +1,32 @@
 package com.example.marvel.marvel.Comics;
 
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Comic implements Serializable {
-    private String id;
+    private int id;
     private String imageUrl;
+    private String extensionImage;
     private String descripcion;
-    private String year;
+    private String autor;
 
-    public Comic(String id, String imageUrl, String descripcion, String year, String titulo) {
+    public Comic(int id, String imageUrl, String extensionImage, String descripcion, String titulo, String autor) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.descripcion = descripcion;
-        this.year = year;
         this.titulo = titulo;
+        this.extensionImage = extensionImage;
+        this.autor = autor;
+
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -33,20 +38,20 @@ public class Comic implements Serializable {
         this.imageUrl = imageUrl;
     }
 
+    public String getExtensionImage() {
+        return extensionImage;
+    }
+
+    public void setExtensionImage(String extensionImage) {
+        this.extensionImage = extensionImage;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
     }
 
     public String getTitulo() {

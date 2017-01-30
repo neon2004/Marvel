@@ -30,10 +30,10 @@ import butterknife.OnClick;
 public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder> {
 
     @Bind(R.id.imgComicList)
-    static
+
     ImageView imgComicList;
     @Bind(R.id.tvNamelist)
-    static
+
     TextView tvNamelIST;
     @Bind(R.id.card)
     CardView card2;
