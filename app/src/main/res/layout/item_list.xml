@@ -15,16 +15,15 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        card_view:cardBackgroundColor="#fffffe91"
         card_view:cardUseCompatPadding="true"
         card_view:cardCornerRadius="6dp"
         card_view:cardElevation="5dp"
-        card_view:cardPreventCornerOverlap="false">
+        card_view:cardPreventCornerOverlap="false"
+        card_view:cardBackgroundColor="@null">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            card_view:srcCompat="@mipmap/ic_launcher"
             android:id="@+id/imgComicList" />
 
         <TextView
@@ -32,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="namePeli"
             android:layout_gravity="bottom"
             android:elevation="1dp"
             android:background="#8c000000"

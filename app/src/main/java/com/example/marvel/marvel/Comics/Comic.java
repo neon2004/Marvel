@@ -11,6 +11,8 @@ public class Comic implements Serializable {
     private String extensionImage;
     private String descripcion;
     private String autor;
+    private String imageUrlOK;
+    private String titulo;
 
     public Comic(int id, String imageUrl, String extensionImage, String descripcion, String titulo, String autor) {
         this.id = id;
@@ -19,6 +21,7 @@ public class Comic implements Serializable {
         this.titulo = titulo;
         this.extensionImage = extensionImage;
         this.autor = autor;
+        this.imageUrlOK = imageUrl+"."+extensionImage;
 
     }
 
@@ -62,7 +65,22 @@ public class Comic implements Serializable {
         this.titulo = titulo;
     }
 
-    private String titulo;
+
+    public String getImageUrlOK() {
+        return imageUrlOK;
+    }
+
+    public void setImageUrlOK(String imageUrlOK) {
+        this.imageUrlOK = imageUrlOK;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
 
 
 }

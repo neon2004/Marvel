@@ -1,6 +1,8 @@
 package com.example.marvel.marvel.Presenter;
 
 import android.app.Activity;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.example.marvel.marvel.Adapters.ComicsAdapter;
@@ -34,18 +36,13 @@ public class ListComicsPresenter implements IListComicsPresenter {
     }
 //    md5(ts+privateKey+publicKey)
     public void start(){
+        listComicsFragments.showImageFondo(true);
         Date d  = new Date();
         String ts = String.valueOf(d.getTime());
         ts = "1";
         String cadHashMD5 = ts+ Constants.TAG_APIKEY_PRIVATE+Constants.TAG_APIKEY_PUBLIC;
         String valueHash = md5(cadHashMD5);
         listComics  = interactor.getListComics(ts,valueHash);
-
-//        ComicsAdapter adapter = new ComicsAdapter(listComics,act.getApplicationContext());
-//        adapter.listener = this;
-//        listComicsFragments.setListAdapter(adapter);
-//        listComicsFragments.setLayoutManager();
-
     }
 
     public String md5(String s) {
@@ -73,10 +70,16 @@ public class ListComicsPresenter implements IListComicsPresenter {
 
     @Override
     public void createAdapter(ArrayList<Comic> listComics) {
+        listComicsFragments.showImageFondo(false);
         ComicsAdapter adapter = new ComicsAdapter(listComics,act.getApplicationContext());
-        adapter.listener = this;
+        adapter.callback = this;
         listComicsFragments.setListAdapter(adapter);
         listComicsFragments.setLayoutManager();
 
+    }
+
+    @Override
+    public void goDetail(Comic comic) {
+        listComicsFragments.goToDetailContact(comic);
     }
 }

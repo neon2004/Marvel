@@ -5,11 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.marvel.marvel.Adapters.ComicsAdapter;
 import com.example.marvel.marvel.Comics.Comic;
@@ -30,7 +31,11 @@ public class ListComicsFragments extends Fragment implements IListComicsView {
     @Bind(R.id.recView)
     RecyclerView recView;
     @Bind(R.id.activity_main)
-    RelativeLayout activityMain;
+    LinearLayout activityMain;
+    @Bind(R.id.appbar)
+    Toolbar appbar;
+    @Bind(R.id.imageView)
+    ImageView imageView;
     private ListComicsPresenter comicsListPresenter;
 
 
@@ -52,6 +57,8 @@ public class ListComicsFragments extends Fragment implements IListComicsView {
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.list_comic_fragment, container, false);
         ButterKnife.bind(this, v);
+
+        appbar.setTitle(R.string.app_name);
         return v;
     }
 
@@ -59,7 +66,7 @@ public class ListComicsFragments extends Fragment implements IListComicsView {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.comicsListPresenter = new ListComicsPresenter(this,getActivity());
+        this.comicsListPresenter = new ListComicsPresenter(this, getActivity());
         this.comicsListPresenter.start();
     }
 
@@ -71,9 +78,24 @@ public class ListComicsFragments extends Fragment implements IListComicsView {
 
     @Override
     public void setLayoutManager() {
-        recView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        recView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
+    @Override
+    public RecyclerView getListView() {
+        return recView;
+    }
+
+    @Override
+    public void showImageFondo(boolean mostrar) {
+        if (mostrar){
+            imageView.setVisibility(View.VISIBLE);
+            recView.setVisibility(View.GONE);
+        }else{
+            imageView.setVisibility(View.GONE);
+            recView.setVisibility(View.VISIBLE);
+        }
+    }
 
 
     @Override

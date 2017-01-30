@@ -7,6 +7,7 @@ package com.example.marvel.marvel.Interfaces;
 public interface  IDetailComicsView {
     void  setImage(String url);
     void setTitle(String titulo);
-    void setDescription(String Descripcion);
+    void setDescription(String descripcion);
+    void setAutor(String autor);
 
 }

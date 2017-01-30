@@ -1,7 +1,9 @@
 package com.example.marvel.marvel.View.Fragments;
 
 import android.app.Fragment;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -39,6 +42,10 @@ public class DetailComicsFragments extends Fragment implements IDetailComicsView
     AppBarLayout appBar;
     @Bind(R.id.coordinator)
     CoordinatorLayout coordinator;
+    @Bind(R.id.tvDescripcion)
+    TextView tvDescripcion;
+    @Bind(R.id.tvAutor)
+    TextView tvAutor;
     private Comic comic;
     private DetailComicsPresenter comicsDetailPresenter;
 
@@ -63,20 +70,22 @@ public class DetailComicsFragments extends Fragment implements IDetailComicsView
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         this.comicsDetailPresenter = new DetailComicsPresenter(this, getActivity(), comic);
         this.comicsDetailPresenter.start();
+
     }
 
     @Override
     public void setImage(String url) {
         Glide.with(this).load(url)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .placeholder(R.drawable)
-//                    .error(R.drawable.loaderror)
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
                 .into(imageParalax);
     }
 
@@ -87,7 +96,12 @@ public class DetailComicsFragments extends Fragment implements IDetailComicsView
 
     @Override
     public void setDescription(String Descripcion) {
+        tvDescripcion.setText(Descripcion);
+    }
 
+    @Override
+    public void setAutor(String autor) {
+        tvAutor.setText(autor);
     }
 
     @Override

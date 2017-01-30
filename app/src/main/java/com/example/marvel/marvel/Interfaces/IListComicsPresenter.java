@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public interface IListComicsPresenter {
 
     void createAdapter(ArrayList<Comic> listComics);
+    void goDetail(Comic comic);
 
 
 }

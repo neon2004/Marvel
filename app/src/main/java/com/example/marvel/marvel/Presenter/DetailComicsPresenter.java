@@ -22,8 +22,9 @@ public class DetailComicsPresenter {
 
     public void start(){
 
-        detailComicsFragments.setImage(comic.getImageUrl());
+        detailComicsFragments.setImage(comic.getImageUrlOK());
         detailComicsFragments.setTitle(comic.getTitulo());
+        detailComicsFragments.setAutor(comic.getAutor());
         detailComicsFragments.setDescription(comic.getDescripcion());
     }
 }

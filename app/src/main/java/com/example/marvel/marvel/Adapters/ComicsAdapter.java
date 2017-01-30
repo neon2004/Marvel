@@ -26,21 +26,23 @@ import butterknife.OnClick;
  * Created by neon2004 on 28/01/2017.
  */
 
-public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder> {
+public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsViewHolder>  {
 
 
     RelativeLayout activityMain;
-    public ListComicsPresenter listener;
+    public ListComicsPresenter callback;
     private ArrayList<Comic> datos;
     private static Context ctx;
-
-    @OnClick(R.id.card)
-    public void onClick() {
-        
-    }
+    private ComicsViewHolder tvh;
+    private View.OnClickListener listener;
 
 
-    public class ComicsViewHolder extends RecyclerView.ViewHolder {
+//    @OnClick(R.id.card)
+//    public void onClick() {
+//        listener.goDetail(tvh.getComic());
+//    }
+
+     public class ComicsViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.imgComicList)
         ImageView imgComicList;
         @Bind(R.id.tvNamelist)
@@ -48,24 +50,39 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsView
         @Bind(R.id.card)
         CardView card;
 
+        public Comic getComic() {
+            return comic;
+        }
+
+        private  Comic comic;
+
         public ComicsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
         public void bindComic(Comic comic) {
+            this.comic = comic;
             tvNamelist.setText(comic.getTitulo());
-            Glide.with(ctx).load(comic.getImageUrl() + "." + comic.getExtensionImage())
+            Glide.with(ctx).load(comic.getImageUrlOK())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .placeholder(R.drawable)
-//                    .error(R.drawable.loaderror)
-//                    .centerCrop()
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error)
                     .centerCrop()
                     .animate(android.R.anim.fade_in)
                     .into(imgComicList);
 //            listener.goToDetailContact(comic);
-            listener.onItemClick(comic);
+//            listener.onItemClick(comic);
+
+            card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callback.goDetail(datos.get(getAdapterPosition()));
+                }
+            });
         }
+
+
     }
 
     public ComicsAdapter(ArrayList<Comic> datos, Context context) {
@@ -77,7 +94,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsView
     public ComicsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_list, parent, false);
-        ComicsViewHolder tvh = new ComicsViewHolder(itemView);
+        tvh = new ComicsViewHolder(itemView);
 
         return tvh;
     }
@@ -96,10 +113,12 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsView
 //    public void setOnClickListener(View.OnClickListener listener) {
 //        this.listener = listener;
 //    }
-
+//
 //    @Override
 //    public void onClick(View view) {
+//        int position  =   getAdapterPosition();
 //        if (listener != null)
-//            listener.onClick(view);
+//            listener.onClick(view,this.getLayoutPosition());
+//        view.get
 //    }
 }

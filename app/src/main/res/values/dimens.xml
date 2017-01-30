@@ -3,4 +3,6 @@
     <dimen name="activity_horizontal_margin">5dp</dimen>
     <dimen name="activity_vertical_margin">3dp</dimen>
     <dimen name="fab_margin">5dp</dimen>
+    <dimen name="detailComic_margin_horizontal">20dp</dimen>
+
 </resources>

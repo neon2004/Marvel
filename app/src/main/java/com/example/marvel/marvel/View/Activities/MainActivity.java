@@ -1,11 +1,14 @@
 package com.example.marvel.marvel.View.Activities;
 
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.marvel.marvel.Base.BaseActivity;
@@ -28,10 +31,13 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.contenedor)
     LinearLayout contenedor;
+
+
     private ListComicsFragments listComicsFragments;
     private DetailComicsFragments detailComicsFragments;
     public Retrofit retrofit;
     public INetwork interfaces;
+    public Fragment FRAGMENT_ACTUAL;
 
 
     @Override
@@ -52,12 +58,19 @@ public class MainActivity extends BaseActivity {
 
             interfaces = retrofit.create(INetwork.class);
 
-
             changeFragment(null, Constants.TAG_LISTACOMICSFR);
         } else {
             showError(getString(R.string.errorNoInternet));
         }
+    }
 
+    @Override
+    public void onBackPressed() {
+        if(FRAGMENT_ACTUAL instanceof ListComicsFragments){
+            finish();
+        }else{
+            changeFragment(null, Constants.TAG_LISTACOMICSFR);
+        }
 
     }
 
@@ -86,19 +99,22 @@ public class MainActivity extends BaseActivity {
 
         switch (framgenCargar) {
             case Constants.TAG_LISTACOMICSFR:
+
                 if (listComicsFragments == null) {
                     listComicsFragments = ListComicsFragments.newInstance(arguments);
                 }
+                FRAGMENT_ACTUAL = listComicsFragments;
                 ft.replace(android.R.id.content, listComicsFragments);
                 ft.commit();
 
                 break;
             case Constants.TAG_DETAILCOMICSFR:
+
                 arguments.putSerializable("comic", comic);
-                if (listComicsFragments == null) {
-                    detailComicsFragments = DetailComicsFragments.newInstance(arguments);
-                }
-                ft.replace(android.R.id.content, listComicsFragments);
+                detailComicsFragments = null;
+                detailComicsFragments = DetailComicsFragments.newInstance(arguments);
+                FRAGMENT_ACTUAL = detailComicsFragments;
+                ft.replace(android.R.id.content, detailComicsFragments);
                 ft.commit();
                 break;
 
