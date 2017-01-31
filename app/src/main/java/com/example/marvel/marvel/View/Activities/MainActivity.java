@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.widget.LinearLayout;
 
-import com.example.marvel.marvel.Base.BaseActivity;
+import com.example.marvel.marvel.View.Activities.Base.BaseActivity;
 import com.example.marvel.marvel.Comics.Comic;
 import com.example.marvel.marvel.Dialogs.DialogoWifi;
 import com.example.marvel.marvel.R;
