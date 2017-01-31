@@ -36,12 +36,6 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsView
     private ComicsViewHolder tvh;
     private View.OnClickListener listener;
 
-
-//    @OnClick(R.id.card)
-//    public void onClick() {
-//        listener.goDetail(tvh.getComic());
-//    }
-
      public class ComicsViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.imgComicList)
         ImageView imgComicList;

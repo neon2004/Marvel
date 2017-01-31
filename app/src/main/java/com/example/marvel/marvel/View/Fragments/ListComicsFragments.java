@@ -7,6 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -66,10 +69,11 @@ public class ListComicsFragments extends Fragment implements IListComicsView {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.comicsListPresenter = new ListComicsPresenter(this, getActivity());
+        if(this.comicsListPresenter == null){
+            this.comicsListPresenter = new ListComicsPresenter(this, getActivity());
+        }
         this.comicsListPresenter.start();
     }
-
 
     @Override
     public void setListAdapter(ComicsAdapter adapter) {

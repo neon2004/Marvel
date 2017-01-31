@@ -8,6 +8,7 @@ import com.example.marvel.marvel.Comics.ComicsResult;
 import com.example.marvel.marvel.Comics.Result;
 import com.example.marvel.marvel.Interfaces.IListComicsPresenter;
 import com.example.marvel.marvel.Presenter.ListComicsPresenter;
+import com.example.marvel.marvel.R;
 import com.example.marvel.marvel.View.Activities.MainActivity;
 
 import java.util.ArrayList;
@@ -29,7 +30,6 @@ public class ComicsInteractor {
     public ComicsInteractor(Activity activity, ListComicsPresenter listComicsPresenter) {
         act = (MainActivity) activity;
         callback = listComicsPresenter;
-
     }
 
     public ArrayList<Comic> getListComics(String ts, String valueHash){
@@ -43,10 +43,6 @@ public class ComicsInteractor {
             @Override
             public void onResponse(Call<ComicsResult> call, Response<ComicsResult> response) {
                 if(response.isSuccessful()){
-
-                    Log.e("OK","PETICION OK: "+response.body());
-//                    String id = response.body().getData().getResults()
-
                     Comic c = null;
                     for ( Result  item :response.body().getData().getResults()) {
                         c =  new Comic(item.getId(),item.getThumbnail().getPath(),item.getThumbnail().getExtension(),item.getDescription(),
@@ -57,14 +53,13 @@ public class ComicsInteractor {
 
                     callback.createAdapter(lisresult);
                 }else{
-                    Log.e("ERROR","ERROR DATOS: "+response.message());
-                    response.errorBody();
+                    act.showError(act.contenedor,act.getString(R.string.errorGetDatos));
                 }
             }
 
             @Override
             public void onFailure(Call<ComicsResult> call, Throwable t) {
-                Log.e("ERROR","ERROR PETICION: "+t.getMessage());
+                act.showError(act.contenedor,act.getString(R.string.errorGetDatos));
             }
         });
 

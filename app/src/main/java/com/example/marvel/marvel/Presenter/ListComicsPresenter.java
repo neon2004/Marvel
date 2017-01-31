@@ -37,6 +37,10 @@ public class ListComicsPresenter implements IListComicsPresenter {
 //    md5(ts+privateKey+publicKey)
     public void start(){
         listComicsFragments.showImageFondo(true);
+        getDatos();
+    }
+
+    public void getDatos(){
         Date d  = new Date();
         String ts = String.valueOf(d.getTime());
         ts = "1";
@@ -82,4 +86,6 @@ public class ListComicsPresenter implements IListComicsPresenter {
     public void goDetail(Comic comic) {
         listComicsFragments.goToDetailContact(comic);
     }
+
+
 }
