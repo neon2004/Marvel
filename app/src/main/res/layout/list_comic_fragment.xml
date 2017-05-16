@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.marvel.marvel.View.Activities.MainActivity"
+    tools:context="com.example.marvel.marvel.comics.ComicsActivity"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
